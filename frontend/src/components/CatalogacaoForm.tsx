@@ -2,6 +2,11 @@ import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Bot, Dna, HeartPulse, MapPin, Zap } from "lucide-react";
 import type { Sighting } from "../App";
 
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://dsin-coder-challenge.onrender.com";
+
 interface ApiError {
   error: string;
 }
@@ -135,7 +140,7 @@ export function CatalogacaoForm() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/patos", {
+      const response = await fetch(`${API_URL}/patos`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),

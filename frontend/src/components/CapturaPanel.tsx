@@ -4,6 +4,12 @@ import { Analise } from "./Analise";
 import { DroneStatus } from "./DroneStatus";
 import { TargetInfo } from "./TargetInfo";
 import { CombatStrategy } from "./CombatStrategy";
+
+const API_URL =
+  window.location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://dsin-coder-challenge.onrender.com";
+
 interface CapturaPanelProps {
   selectedDuck: Sighting | null;
   setSelectedDuck: (duck: Sighting | null) => void;
@@ -18,7 +24,7 @@ export function CapturaPanel({
   useEffect(() => {
     const fetchDucks = async () => {
       try {
-        const response = await fetch("http://localhost:3000/patos");
+        const response = await fetch(`${API_URL}/patos`);
         if (!response.ok) {
           throw new Error("Falha ao buscar patos catalogados.");
         }
